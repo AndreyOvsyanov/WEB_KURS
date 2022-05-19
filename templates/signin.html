@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>Шапка сайта</p>
+{% if current_user %}
+<p>Вы зашли под пользователем {{ current_user.username }}</p>
+{% endif %}
+{% endblock %}
