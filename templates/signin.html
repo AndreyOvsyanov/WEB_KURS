@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if current_user %}
+<p>Вы зашли под пользователем {{ current_user.username }}</p>
+{% endif %}
+{% endblock %}

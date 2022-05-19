@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p> Номер пользователя: {{ data.id }} </p>
+<p> Имя пользователя: {{ data.username }} </p>
+<p> Электронный адрес пользователя: {{ data.email }} </p>
+<p> Логин пользователя: {{ data.login }} </p>
+<p> Права пользователя: {{ data.role }} </p>
+<p> Фотография пользователя: {{ data.photo }} </p>
+
+<p> Рейтинг пользователя: </p>
+<div class="star_bugs">
+    {% for _ in range(3) %}
+        <img src="static/img/star_full_v1.png">
+    {% endfor %}
+    {% for _ in range(2) %}
+        <img src="static/img/star_empty.png">
+    {% endfor %}
+</div>
+
+<a class="index-center" href="/announce">Создать объявление</a>
+<a class="index-center" href="/logout">Выйти</a>
+
+
+{% endblock %}

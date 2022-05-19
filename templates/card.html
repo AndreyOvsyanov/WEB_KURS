@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a class="index-center" href="/index">Назад</a>
+
+<p> Номер объявления: {{ data.id }} </p>
+<p> Название объявления: {{ data.name }} </p>
+<p> Описание объявления: {{ data.description }} </p>
+<p> Тип категории: {{ data.category_id }} </p>
+<p> Фото объявления: <img src="{{ data.photo }}"></p>
+<p> Дата опубликования: {{ data.created_on }} </p>
+
+{% endblock %}
