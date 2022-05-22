@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div id="on_acceptance">
+    <p> Рассмотрение </p>
+    {% for on_accept in on_acceptance %}
+        <a href="/card{{on_accept.id}}">
+            <form action='{{ url_for("accept", id=on_accept.id) }}'>
+                <div class="card">
+                    <p> Номер объявления: {{ on_accept.id }}</p>
+                    <p> Название объявления: {{ on_accept.name }} </p>
+                    <p> Описание объявления: {{ on_accept.description }} </p>
+                    <p> Тип категории: {{ on_accept.category_id }} </p>
+                    <p> Фото объявления: <img src="{{ on_accept.photo }}"></p>
+                    <p> Дата опубликования: {{ on_accept.created_on }} </p>
+                    <button type="submit">Одобрить</button>
+                </div>
+            </form>
+        </a>
+    {% endfor %}
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+{% endblock %}
+

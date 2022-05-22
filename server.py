@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash
-from forms import LoginForm, RegistryForm, AnnounceForm
+from forms import *
 from flask_login import LoginManager, logout_user, current_user, login_user
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -95,9 +95,60 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-@app.route('/admin_panel')
+@app.route('/admin')
 def admin_panel():
-    return render_template('panel.html', )
+    return render_template('panel.html')
+
+
+@app.route('/on_deleted/<int:id>')
+def on_deleted(id):
+
+    announce = Announce.query.filter_by(id=id).first()
+    if announce.status == Status.ON_DELETED:
+        db.session.delete(announce)
+    else:
+        announce.status = Status.ON_DELETED
+
+    db.session.commit()
+
+    return redirect('/index')
+
+
+@app.route('/deleted/<int:id>', methods=['POST', 'GET'])
+def delete(id):
+
+    announce = Announce.query.filter_by(id=id).first()
+    db.session.delete(announce)
+    db.session.commit()
+
+    return redirect('/deleted')
+
+
+@app.route('/deleted', methods=['POST', 'GET'])
+def deleted():
+    return render_template(
+        'deleted.html',
+        deleted=Announce.query.filter_by(status=Status.ON_DELETED)
+    )
+
+
+@app.route('/accepted/<int:id>')
+def accept(id):
+
+    announce = Announce.query.filter_by(id=id).first()
+    announce.status = Status.CURRENT
+    announce.data_success = datetime.datetime.utcnow()
+    db.session.commit()
+
+    return redirect('/accepted')
+
+
+@app.route('/accepted')
+def accepted():
+    return render_template(
+        'accepted.html',
+        on_acceptance=Announce.query.filter_by(status=Status.UNDER_CONSIDERATION)
+    )
 
 
 @app.route('/profile')
@@ -107,13 +158,15 @@ def profile():
 
 @app.route('/card<int:id>')
 def card(id):
-    return render_template('card.html', data=Announce.query.filter_by(id=id).first())
+    data = Announce.query.filter_by(id=id).first()
+    return render_template('card.html', data=data)
 
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect('index')
+
 
 
 @app.route('/signup')
@@ -137,7 +190,6 @@ def signin():
 @app.route('/announce', methods=['POST', 'GET'])
 def announce():
     form = AnnounceForm()
-    print(Category().get_all_name())
     form.category.choices = Category().get_all_name()
     if request.method == 'POST':
         announce = Announce()

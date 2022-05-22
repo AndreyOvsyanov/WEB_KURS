@@ -10,4 +10,10 @@
 <p> Фото объявления: <img src="{{ data.photo }}"></p>
 <p> Дата опубликования: {{ data.created_on }} </p>
 
+{% if current_user.id == data.user_id or current_user.role == "Админинстратор" %}
+
+<a class="index-center" href="/on_deleted/{{data.id}}">Подготовить к удалению</a>
+
+{% endif %}
+
 {% endblock %}

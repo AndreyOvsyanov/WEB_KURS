@@ -34,7 +34,7 @@ img {
 }
 
 .card {
-    height: 150px;
+    height: 175px;
     width: 100%;
     margin: auto;
     margin-top: 5px;
@@ -46,6 +46,11 @@ img {
     justify-content: end;
     background-color: beige;
     cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.01);
+
 }
 
 .card > p {
@@ -144,9 +149,34 @@ ul {
     padding-left: 16px;
     padding-right: 16px;
     margin: 0 auto;
+
 }
 
 .star_bugs {
     display: flex;
     flex-direction: row;
+}
+
+#delete, #on_accept {
+    width: 150px;
+    height: 25px;
+    background-color: #F5F5F5;
+    margin: 1px;
+    text-align: center;
+    box-shadow: 1px 1px cornflowerblue;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.announce {
+    display: flex;
+    flex-direction: row;
+}
+
+.star_bugs > img {
+    height: 50px;
+    width: 50px;
 }

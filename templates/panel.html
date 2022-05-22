@@ -1,29 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="index-services-menu-link">На удаление</div>
-<div class="index-services-menu-link">На рассмотрение</div>
-
-<div class="deleted">
-    {% for delete in deleted %}
-        <div class="card">
-            <p>{{delete['category']}}</p>
-			<p>{{delete['name']}}</p>
-			<p>{{delete['created_on']}}</p>
-			<img src='{{element["photo"]}}'>
-        </div>
-    {% endfor %}
+<div class="announce">
+    <a class="index-center" href="/deleted">Удаление объявлений</a>
+    <a class="index-center" href="/accepted">Рассмотрение объявлений</a>
 </div>
 
-<div class="on_acceptance">
-    {% for on_accept in on_acceptance%}
-        <div class="card">
-            <p>{{delete['category']}}</p>
-			<p>{{delete['name']}}</p>
-			<p>{{delete['created_on']}}</p>
-			<img src='{{element["photo"]}}'>
-        </div>
-    {% endfor %}
-</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 {% endblock %}
+
