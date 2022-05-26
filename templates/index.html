@@ -1,18 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="container_filter">
+        {% for filter in filters %}
+            <div class="category-with-counters-item">
+                <a class="link-link" href="/index/{{filter}}">{{filter}}</a>
+            </div>
+        {% endfor %}
+    </div>
 
-<div id="block_content">
-	{% for element in record %}
-	<a href="/card{{element.id}}">
-		<div class="card">
-			<p>{{element['category']}}</p>
-			<p>{{element['name']}}</p>
-			<p>{{element['created_on']}}</p>
-			<img src='{{element["photo"]}}'>
-		</div>
-	</a>
-	{% endfor %}
-</div>
+    <div id="block_content" class="index-inner-announces">
+        <div class="index-content">
+            <div class="styles-title">
+                <h2 class="text-size-l">
+                {% if record.items()|length == 0 %}
+                    Объявлений нет</h2>
+                {% else %}
+                        Объявления</h2>
+                    </div>
 
+                    <div class="styles-list">
+                        {% for element, image in record.items() %}
+                            <div class="styles-item">
+                                <div class="styles-root">
+                                    <header>
+                                        <a href="/card{{ element.id }}" target="_blank" title="Объявление «{{ element.name }}»">
+                                            <div class="photo-slider">
+                                                <ul class="photo-slider-list">
+                                                    <li class="photo-slider-list-item">
+                                                        <div class="photo-slider-item">
+                                                            <img class="photo-slider-image" alt="{{ element.name }}" src="{{ image[0] }}" sizes="(min-width: 1334px) 236px, 208px">
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </a>
+                                    </header>
 
+                                    <div class="body-root">
+                                        <div>
+                                            <a href="/card{{ element.id }}" target="_blank" title="{{ element.name }}"  class="title-root">
+                                                <h3 class="title-root text-size-s">
+                                                    {{ element.name }}
+                                                </h3>
+                                            </a>
+                                        </div>
+
+                                        <span class="text-color-noaccent text-size-s">{{ element.created_on }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

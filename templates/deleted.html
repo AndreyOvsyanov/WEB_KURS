@@ -4,7 +4,7 @@
 
 <div id="deleted">
     <p> Удаление </p>
-    {% for delete in deleted %}
+    {% for delete, path in deleted.items() %}
         <a href="/card{{delete.id}}">
             <form action="{{url_for('delete', id=delete.id)}}" method="post" novalidate>
                 <div class="card">
@@ -12,7 +12,7 @@
                     <p> Название объявления: {{ delete.name }} </p>
                     <p> Описание объявления: {{ delete.description }} </p>
                     <p> Тип категории: {{ delete.category_id }} </p>
-                    <p> Фото объявления: <img src="{{ delete.photo }}"></p>
+                    <p> Фото объявления: <img src="{{ path[0] }}"></p>
                     <p> Дата опубликования: {{ delete.created_on }} </p>
                     <button type="submit">Удалить</button>
                 </div>

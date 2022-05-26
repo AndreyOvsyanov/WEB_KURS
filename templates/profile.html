@@ -1,22 +1,119 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% for data, pathes in profile.items() %}
+        <div class="item-view-page-layout">
+        <div class="style-item-view-page-layout">
+            <div class="style-item-navigation">
+                <span class="breadcrumbs-linkWrapper">
+                    <a class="breadcrumbs-link">
+                        <span>Роль: {{ data.role }}</span>
+                    </a>
+                </span>
+            </div>
 
-<p> Номер пользователя: {{ data.id }} </p>
-<p> Имя пользователя: {{ data.username }} </p>
-<p> Электронный адрес пользователя: {{ data.email }} </p>
-<p> Логин пользователя: {{ data.login }} </p>
-<p> Права пользователя: {{ data.role }} </p>
-<p> Фотография пользователя: {{ data.photo }} </p>
+            <div class="style-item-view-content">
+                <div class="style-item-view-content-left">
+                    <div class="style-title-info-container">
+                        <div>
+                            <h1 class="style-title-info-title">
+                                <span>{{ data.username }}</span>
+                            </h1>
+                        </div>
 
-<p> Рейтинг пользователя: </p>
-<div class="star_bugs">
-    {% for _ in range(5) %}
-        <img src="static/img/profile/star_empty.png">
+                        <div class="style-title-info-actions">
+                            <span>{{ data.created_on }}</span>
+                        </div>
+                    </div>
+
+                    {% if data.id == current_user.id or current_user.role == "Админинстратор" %}
+                        <div class="style-item-view-main">
+                            <div class="gallery-block-new-style-container">
+                                <div class="image-frame-borderWrapper-p1PJn">
+                                    <span class="image-frame-cover" style="background-image: url({{ pathes[0] }});"></span>
+                                    <img class="css" src="{{ pathes[0] }}" alt="{{ data.name }}">
+                                </div>
+                            </div>
+
+                            <div class="style-item-view-block">
+                                <div class="style-item-description-title">
+                                    E-mail
+                                </div>
+
+                                <div class="style-item-description-text">
+                                    <p>
+                                        {{ data.email }}
+                                    </p>
+                                </div>
+
+                                <div class="style-item-description-title">
+                                    Логин
+                                </div>
+
+                                <div class="style-item-description-text">
+                                    <p>
+                                        {{ data.login }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="style-item-view-content-right">
+                    <div class="style-item-view-actions">
+                        <div id="rating_title" class="style-item-description-title">
+                            Рейтинг: {{ mark[0] }}
+                        </div>
+
+                        <div class="star_bugs">
+                            {% for _ in range(mark[1]) %}
+                                <img src="/static/img/profile/star_full.png">
+                            {% endfor %}
+                            {% for _ in range(mark[2]) %}
+                                <img src="/static/img/profile/star_half.png">
+                            {% endfor %}
+                            {% for _ in range(mark[3]) %}
+                                <img src="/static/img/profile/star_empty.png">
+                            {% endfor %}
+                        </div>
+
+                        <div class="contact-bar-wrapper">
+                            <span>
+                                <div>
+                                    {% for data, pathes in profile.items() %}
+                                        {% if data.id == current_user.id %}
+                                            <a href="/announce">
+                                                <button class="button-button">
+                                                    <span>
+                                                        <div class="button-button__text_wrapper">
+                                                            <span class="text-size-l">Создать объявление</span>
+                                                        </div>
+                                                    </span>
+                                                </button>
+                                            </a>
+
+                                            <a href="/logout">
+                                                <button id="exit_button" class="button-button">
+                                                    <span>
+                                                        <div class="button-button__text_wrapper">
+                                                            <span class="text-size-l">Выйти</span>
+                                                        </div>
+                                                    </span>
+                                                </button>
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="style-item-view-search-info-redesign">
+                        <span>ID: {{ data.id }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-</div>
-
-<a class="index-center" href="/announce">Создать объявление</a>
-<a class="index-center" href="/logout">Выйти</a>
-
-
 {% endblock %}

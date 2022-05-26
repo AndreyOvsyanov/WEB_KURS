@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a class="index-center" href="/card{{data.id}}">Назад</a>
+
+<p> Номер объявления: {{ data.id }} </p>
+<p> Название объявления: {{ data.name }} </p>
+<p> Описание объявления: {{ data.description }} </p>
+<p> Тип категории: {{ data.category_id }} </p>
+<p> Фото объявления: <img src="{{ path[0] }}"></p>
+<p> Дата опубликования: {{ data.created_on }} </p>
+
+<p> Профиль пользователя: <a href="/profile/{{ data.user_id }}"> {{ data.user_id }} </a> </p>
+
+{% if current_user.is_authenticated %}
+
+    <form action="" method="post">
+        <button type="submit">Подтвердить завершение</button>
+    </form>
+
+{% endif %}
+
+{% endblock %}

@@ -2,7 +2,7 @@
 {% block content %}
 <div class="form">
     <h1>Registration</h1>
-    <form action="" method="post" validate>
+    <form action="" method="post" enctype="multipart/form-data" validate>
         {{ form.hidden_tag() }}
         <p> {{ form.firstname.label }}<br> {{ form.firstname(size=32) }} </p>
         <p> {{ form.surname.label }}<br> {{ form.surname(size=32) }} </p>
@@ -12,6 +12,10 @@
         <p> {{ form.password.label }}<br> {{ form.password(size=120) }} </p>
         <p> {{ form.password_repeat.label }}<br> {{ form.password_repeat(size=120) }} </p>
         <p> {{ form.remember_me() }} {{ form.remember_me.label }} </p>
+        <div>
+           <label for="file">Choose file</label>
+           <input type="file" id="file" name="file" multiple>
+        </div>
         <p> {{ form.submit() }} </p>
     </form>
     {% if message %}

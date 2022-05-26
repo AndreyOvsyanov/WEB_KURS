@@ -22,7 +22,7 @@
                 <div class="index-services-menu">
                     {% if current_user.is_authenticated %}
                         {% if current_user.role == "Админинстратор" %}
-                            <a class="index-services-menu-link" href="/admin">Кабинет админинстратора</a>
+                            <a class="index-services-menu-link" href="/admin">Кабинет администратора</a>
                         {% endif %}
                         <a class="index-services-menu-link" href="/profile">Профиль</a>
                     {% else %}
@@ -38,6 +38,27 @@
             {% block content %}
 
             {% endblock %}
+        </div>
+
+        <div class="footer">
+            <ul class="footer-nav">
+                <li>
+                    <a class="footer-item" href="/announce" title="Разместить объявление">Разместить объявление</a>
+                </li>
+
+                <li>
+                    <a class="footer-item" href="/index">Объявления</a>
+                </li>
+
+                <li>
+                    <a class="footer-item" href="/about">О компании</a>
+                </li>
+            </ul>
+
+            <div class="footer-info">
+                Сайт объявлений.
+                © ООО «Тёпленькая пошла» 2022.
+            </div>
         </div>
     </div>
 </body>

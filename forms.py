@@ -38,6 +38,12 @@ class AnnounceForm(FlaskForm):
     category = SelectField('Выбор категории')
 
     submit = SubmitField('Create')
+
+class ReviewForm(FlaskForm):
+    text = StringField('Текст')
+
+    submit = SubmitField('Отправить')
+
 '''
 class DeletedForm(FlaskForm):
     id = StringField('Идентификатор')

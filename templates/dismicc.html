@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div id="deleted">
+    <p> Удаление </p>
+    {% for dis in dismicced %}
+        <a href="/card{{dis.id}}">
+            <form action="{{url_for('dismicced', id=dis.id)}}" method="post" novalidate>
+                <div class="card">
+                    <p> Номер объявления: {{ dis.id }}</p>
+                    <p> Название объявления: {{ dis.name }} </p>
+                    <p> Описание объявления: {{ dis.description }} </p>
+                    <p> Тип категории: {{ dis.category_id }} </p>
+                    <p> Фото объявления: <img src="{{ dis.photo }}"></p>
+                    <p> Дата опубликования: {{ dis.created_on }} </p>
+                </div>
+            </form>
+        </a>
+    {% endfor %}
+</div>
+
+
+
+<!-- <script src="{{ url_for('static', filename='js/script.js') }}"></script> -->
+
+{% endblock %}
+

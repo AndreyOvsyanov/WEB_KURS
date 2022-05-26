@@ -19,20 +19,15 @@
             </div>
 
             <div class="container_by_form">
-                <form action='{{ url_for("accept", id=on_accept.id) }}'>
-                    <button type="submit">Одобрить</button>
+                <form action='/complete/{{on_accept.id}}'>
+                    <button type="submit">Завершить оборот</button>
                 </form>
-                <form action='{{ url_for("dismiccing", id=on_accept.id) }}'>
-                    <button type="submit">Отклонить</button>
+                <form action='/deystvo/{{on_accept.id}}'>
+                    <button type="submit">Вернуть в действующие</button>
                 </form>
             </div>
         </a>
     {% endfor %}
 </div>
 
-
-
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
 {% endblock %}
-
